@@ -4,12 +4,10 @@ LABEL maintainer.1="André Lademann <vergissberlin@googlemail.com>"
 
 RUN apk add --no-cache \
     bash \
+    jq \
     nodejs
 
 WORKDIR /opt/resource/
-COPY . /opt/resource
-
-RUN chmod +x /opt/resource/out /opt/resource/in /opt/resource/check
 
 RUN npm install
 # RUN npm test
@@ -19,4 +17,6 @@ RUN rm -rf \
     package.json \
     package-lock.json
 
-RUN ls -lisah
+COPY . /opt/resource
+RUN chmod +x /opt/resource/out /opt/resource/in /opt/resource/check
+
